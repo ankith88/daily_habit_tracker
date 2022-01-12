@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:calendar_timeline/calendar_timeline.dart';
+
 
 import '../../../constants.dart';
 import '../../habbit_list.dart';
@@ -15,6 +17,7 @@ class Landing extends StatefulWidget {
 
 class _LandingState extends State<Landing> {
   final List<Habbits> _userHabbits = [];
+  DateTime _selectedValue = DateTime.now();
 
   void _addHabbit(String title, DateTime selectedDate) {
     final newHabbit = Habbits(
@@ -38,6 +41,11 @@ class _LandingState extends State<Landing> {
         });
   }
 
+  void _showHabitList(){
+    print('inside function');
+    HabbitList(_userHabbits, _selectedValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,73 +60,23 @@ class _LandingState extends State<Landing> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.height * 0.2,
-                child:  Container(
-                  height: 90,
-                  decoration: BoxDecoration(
-                    color: Color(0xff1b232e),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      bottomLeft: Radius.circular(15),
-                    ),
-                  ),
-                  padding: EdgeInsets.all(15),
-                  child: ListView.builder(
-                    itemCount: 7,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (ctx, f) {
-                      int day = DateTime.now().day + f;
-                      return FittedBox(
-                        child: Container(
-                          width: 90,
-                          height: 90,
-                          margin: EdgeInsets.only(right: 15.0),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: day == DateTime.now().day
-                                ? Color(0xff727be8)
-                                : Color(0xff131b26),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          padding: EdgeInsets.all(15.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "${DateTime.now().day + f}",
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: day == DateTime.now().day
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                  color: day == DateTime.now().day
-                                      ? Colors.white
-                                      : Colors.grey[500],
-                                ),
-                              ),
-                              Text(
-                                DateFormat('EE').format(
-                                  DateTime.now().add(
-                                    Duration(days: f),
-                                  ),
-                                ),
-                                style: TextStyle(
-                                    color: day == DateTime.now().day
-                                        ? Colors.white
-                                        : Colors.grey[700],
-                                    fontWeight: day == DateTime.now().day
-                                        ? FontWeight.bold
-                                        : FontWeight.normal),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                padding: EdgeInsets.all(10),
+                child: CalendarTimeline(
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2019, 1, 1),
+                  lastDate: DateTime(2024, 1, 1),
+                  onDateSelected: (date) {
+                    _selectedValue = date!;
+                  } ,
+                  leftMargin: 20,
+                  monthColor: kAppBackgroundColor,
+                  dayColor: kAppBackgroundColor,
+                  activeDayColor: kAmountTextColor,
+                  activeBackgroundDayColor: kSecondaryTextColor,
+                  dotsColor: kAmountTextColor,
                 ),
               ),
-              HabbitList(_userHabbits),
+              HabbitList(_userHabbits, _selectedValue),
             ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
