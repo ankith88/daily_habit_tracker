@@ -3,12 +3,23 @@ import 'package:drop_shadow_image/drop_shadow_image.dart';
 
 import '../../../constants.dart';
 import '../../landing/landing_screen.dart';
+import '../../login/login_screen.dart';
 
 import '../../../components/default_button.dart';
 import '../../../size_config.dart';
 
 class Splash extends StatelessWidget {
-  const Splash({Key? key}) : super(key: key);
+
+  var quotes = [
+    {
+      "quote": "Discipline is choosing between what you want now and what you want most.",
+      "author": "- Abraham Lincoln"
+    },
+    {
+      'quote': 'Success is the sum of small efforts repeated day in and day out.',
+      'author': '- Robert Collier'
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,31 +30,53 @@ class Splash extends StatelessWidget {
           padding: EdgeInsets.all(20),
           child: Column(
             children: <Widget>[
-              Spacer(),
-              Text('Daily Habbit Tracker',
+              Text('Daily Habit Tracker',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: getProportionateScreenWidth(36),
                     color: kCardBackgroundColor,
                     fontWeight: FontWeight.bold,
-                  )),
-              Spacer(
-                flex: 2,
+                  )
+              ),
+              Column(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(
+                        left: 0, bottom: 10, top: 10, right: 0),
+                    child: Text(
+                      quotes[0]['quote'] as String,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: getProportionateScreenWidth(16),
+                          color: Colors.white
+                      ),
+                    ),
+                  ),
+                  Text(
+                    quotes[0]['author'] as String,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: getProportionateScreenWidth(16),
+                        color: Colors.white
+                    ),
+                  ),
+                ],
               ),
               Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(
+                    left: 25, bottom: 50, top: 50, right: 0),
                 child: Image.asset(
-                  "assets/images/casual-life-3d-graph.png",
-                  height: getProportionateScreenHeight(265),
-                  width: getProportionateScreenWidth(235),
+                  "assets/images/casual-life-3d-reading.png",
+                  height: getProportionateScreenHeight(350),
+                  width: getProportionateScreenWidth(350),
                 ),
               ),
-              Spacer(
-                flex: 2,
-              ),
               DefaultButton(
-                text: "Continue",
+                text: "Login",
                 press: () {
-                  Navigator.pushNamed(context, LandingScreen.routeName);
+                  Navigator.pushNamed(context, LoginScreen.routeName);
                 },
               )
             ],

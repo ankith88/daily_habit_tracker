@@ -57,7 +57,7 @@ class _NewHabbitState extends State<NewHabbit> {
             //Moves the button to the right
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText: 'Habbit Name'),
+                decoration: InputDecoration(labelText: 'Habit Name'),
                 controller: titleController,
                 onSubmitted: (_) => submitTx(),
               ),

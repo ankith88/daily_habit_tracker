@@ -67,9 +67,9 @@ class _HabbitListState extends State<HabbitList> {
       height: MediaQuery.of(context).size.height * 0.8,
       child: ListView.builder(
         itemBuilder: (ctx, index) {
-          print('habbit list selected date');
+          print('habit list selected date');
           print(widget.selectedDate);
-          print('Habbit created start date');
+          print('Habit created start date');
           print(widget.habbits[index].dateStarted);
           if(widget.habbits[index].dateStarted == widget.selectedDate){
             return Dismissible(
@@ -162,7 +162,7 @@ class _HabbitListState extends State<HabbitList> {
                           })));
                 });
           } else {
-            return Text('No Habbits Completed');
+            return Text('No Habits Completed');
           }
         },
         itemCount: widget.habbits.length,

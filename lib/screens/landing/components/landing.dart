@@ -51,7 +51,12 @@ class _LandingState extends State<Landing> {
     return Scaffold(
       backgroundColor: Colors.black38,
       appBar: AppBar(
-        title: Text('Daily Habbit Tracker'),
+        title: Text(
+            'Daily Habit Tracker',
+          style: TextStyle(
+            color: kCardBackgroundColor,
+          ),
+        ),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
